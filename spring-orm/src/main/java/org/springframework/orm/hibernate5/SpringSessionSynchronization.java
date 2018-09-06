@@ -87,6 +87,7 @@ public class SpringSessionSynchronization implements TransactionSynchronization,
 
 	@Override
 	public void beforeCommit(boolean readOnly) throws DataAccessException {
+		//如果readonly==false且当前连接回话不是MANUAL模式，则flush
 		if (!readOnly) {
 			Session session = getCurrentSession();
 			// Read-write transaction -> flush the Hibernate Session.
